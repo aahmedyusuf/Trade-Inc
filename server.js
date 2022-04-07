@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const home = require("./routes/home");
 const path = require("path");
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4000;
 
 // Middleware
 app.use(express.json()); // req.body
