@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-
 const home = require("./routes/home");
 const path = require("path");
+
+var database = require('./Database');
+
 
 const port = process.env.PORT || 4000;
 
@@ -31,3 +33,7 @@ app.get("*", (req, res) => {
 app.listen(port, () => {
   console.log("Server is running on port " + port);
 });
+
+database.Connect();
+
+database.getCustomers();
