@@ -1,0 +1,145 @@
+#checkoutforms {
+    text-align: center;
+}
+
+
+#cardrow {
+    text-align: left;
+}
+
+#header {
+    text-align: center;
+}
+
+#header2 {
+    text-align: center;
+}
+
+body {
+    background-color: antiquewhite;
+    font-family: Cursive;
+    font-size: 17px;
+    padding: 8px;
+
+}
+
+
+.Parent {
+    background-color: rgb(221, 219, 216);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
+
+
+.Account-Info {
+    transition: 1s;
+    background-color: antiquewhite;
+    top: 0;
+    left: 0;
+
+    width: 70%;
+    height: 100%;
+    position: absolute;
+
+
+    overflow: auto;
+    float: left;
+    position: relative;
+}
+
+.Image-Section {
+    right: 0;
+    top: 0;
+    width: 30%;
+    height: 100%;
+    position: absolute;
+    transition: 1s;
+    background-color: #5ac7fa
+}
+
+.Image-Section:hover {
+    transition: 1s;
+    width: 35%;
+    background-color: #35bfff
+}
+
+.Login-Form {
+    margin-top: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+
+.Field {
+    margin: 30px;
+    height: 40px;
+    width: 500px;
+    background-color: rgb(180, 170, 170);
+    border: 1.5px solid rgb(180, 170, 170);
+
+    border-radius: 10px;
+    text-align: center;
+    border-style: solid;
+    transition: .5s;
+}
+
+.Field:hover {
+    transition: 0.5s;
+    border: 1.5px solid red;
+    box-shadow: 0 0 6px #f37544;
+
+}
+
+.Field:focus {
+    transition: 1s;
+    border: 2px solid red;
+}
+
+.Login-Button {
+    margin: 30px;
+    height: 50px;
+    width: 450px;
+    background-color: rgb(130, 252, 242);
+    border: 0ch;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 30px;
+
+    transition: 1s;
+}
+
+
+.button {
+    font-size: large;
+    font-family: cursive;
+}
+
+.container {
+    background-color: whitesmoke;
+    padding: 5px 20px 15px 20px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}
+
+
+
+.icon-container {
+    margin-bottom: 20px;
+    padding: 7px 0;
+    font-size: 24px;
+}
+
+hr {
+    border: 1px solid black;
+}
+
+span.price {
+    float: right;
+    color: grey;
+}
