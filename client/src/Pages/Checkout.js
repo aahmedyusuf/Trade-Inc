@@ -21,7 +21,7 @@ function checkout() {
             <div class="col-25">
                 <div class="container">
                     <h4>Cart <span className="price"> </span></h4>
-                    <p><a href="#">Manufacture 1</a> <span className="price">$</span></p>
+                    <Cart manufacturer={"Manufacturer name"} item ={"Item_name"}></Cart>
                     <p><a href="#">Manufacture 2</a> <span className="price">$</span></p>
                     <p><a href="#">Manufacture 3</a> <span className="price">$</span></p>
                     <p><a href="#">Manufacture 4</a> <span className="price">$</span></p>
@@ -150,6 +150,15 @@ function checkout() {
 
     );
 }
+
+function Cart({item, manufacturer}){
+
+    return(
+        <p><a href="#">{item} by {manufacturer}</a> <span className="price">$</span></p>
+    )
+
+}
+
 export default checkout;
 
 

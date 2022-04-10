@@ -84,9 +84,9 @@ font-size: 1em;
     /* bring your own prefixes */
 }
 
-.container{
+.container_home{
     padding: 2px 16px;
 }
-.container h1 {
+.container_home h1 {
     padding-left: 35%;
 }
