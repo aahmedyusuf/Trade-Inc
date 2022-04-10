@@ -1,0 +1,92 @@
+body{
+    background-color: antiquewhite;
+}
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    height: 50px;
+}
+  
+li{
+    float: left;
+}
+  
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 15px;
+    text-decoration: none;
+    font-size: larger;
+}
+
+li a:hover {
+    background-color: rgb(55, 151, 189);
+}
+
+.Card_Holder{
+    display: grid;
+    column-gap: 10px;
+    row-gap: 30px;
+    grid-template-columns: auto auto auto auto;
+    padding: 2%;
+}
+
+.Card{
+    width: 390px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    border-radius: 30px;
+    transition: 1s;
+}
+.Card h1{
+    font-size: 2em;
+}
+.Card h3{
+font-size: 1em;
+}
+.Card:hover{
+    transition: 1s;
+    box-shadow: 0 0 6px #f37544;
+}
+.Card img {
+    width: 200px;
+    height: 200px;
+    margin-left: 25%;
+    margin-top: 20px;
+    border-radius: 30%;
+    box-shadow: 5px 5px 5px #46464631;
+
+}
+.Card button {
+    height: 200px;
+    width: 200px;
+    margin-left: 25%;
+    background-color: rgb(130, 252, 242);
+    font-size: 30px;
+    transition: 1s;
+
+}
+.Card button:hover{
+    transition: 1s;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: rgb(255, 123, 15);
+}
+.centerd{
+    position: relative;
+    width: 100%;
+    /* bring your own prefixes */
+}
+
+.container{
+    padding: 2px 16px;
+}
+.container h1 {
+    padding-left: 35%;
+}

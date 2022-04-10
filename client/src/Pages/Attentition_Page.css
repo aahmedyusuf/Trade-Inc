@@ -10,10 +10,6 @@ body{
     width: 100%;
   }
   
-  .Logo{
-      margin: 10px;
-
-  }
 
 .Account-Info{
     transition: 1s;
@@ -24,6 +20,11 @@ body{
     width: 70%;
     height: 100%;
     position:absolute;
+
+
+    overflow: auto;
+    float: left;
+    position: relative;
 }
 
 .Image-Section{
@@ -99,7 +100,13 @@ body{
     background-color: rgb(255, 123, 15);
     height: 60px;
 
-
-
-
+}
+center{
+    position: fixed;
+    top: 40%;
+    left: 30%;
+    height: 100%;
+    width: 100%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
 }

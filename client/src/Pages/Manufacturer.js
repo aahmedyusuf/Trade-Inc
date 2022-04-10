@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 import loginImage from './SVG/login2.svg';
 import {  Link } from "react-router-dom";
 
-function Home(){
-    document.title = "Home"
+function Manufacturer(){
+    document.title = "Manufacturer"
     return(
     <div>
         <Navbar></Navbar>
@@ -18,8 +18,8 @@ function Home(){
 function Navbar(){
     return (
         <ul>
-         <li><Link style={{background:'rgb(55, 101, 189)'}} to="/home">Home</Link></li>
-          <li><Link to="/">CheckOut</Link></li>
+          <li><Link to="/Manufacturer" style={{background:'rgb(55, 101, 189)'}}>My Products</Link></li>
+          <li><Link to="/CreateProduct">Create Products</Link></li>
           <li><Link to="/">Logout</Link></li>
 
         </ul>
@@ -53,5 +53,4 @@ function Card(){
         </div>
     )
 }
-
-export default Home;
+export default Manufacturer;

@@ -1,0 +1,47 @@
+.Field{
+    height: 40px;
+    width: 600px;
+    background-color: rgb(180, 170, 170);
+    border:1.5px solid rgb(180, 170, 170);
+
+    border-radius: 10px;
+    text-align: center;
+    border-style: solid;
+    transition: .5s;
+}
+.Field:hover{
+    transition: 0.5s;
+    border:1.5px solid red;
+    box-shadow: 0 0 6px #f37544;
+
+}
+.Field:focus{
+    transition: 1s;
+    border:2px solid red;
+}
+center{
+    margin-top: 12%;
+    
+}
+button{
+    margin: 30px;
+    height: 100px;
+    width: 600px;
+    background-color: rgb(130, 252, 242);
+    border: 0ch;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 50px;
+
+    transition: 1s;
+}
+
+button:hover{
+    transition: 1s;
+    cursor: pointer;
+    border-radius: 15px;
+    border: 5px;
+    background-color: rgb(255, 123, 15);
+    height: 110px;
+
+}

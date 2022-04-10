@@ -25,6 +25,14 @@ app.use("/api/home", home);
 app.get("/api/status", (req, res) => {
   res.json({ status: "Running" });
 });
+app.get("/api/getorder", (req, res) =>{
+  try{
+  const result = await database.getOrder(req.query.username);
+  res.json(result);
+}catch{
+  console.log("Error")
+}
+})
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
@@ -35,5 +43,3 @@ app.listen(port, () => {
 });
 
 database.Connect();
-
-database.getCustomers();
