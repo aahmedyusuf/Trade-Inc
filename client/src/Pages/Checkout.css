@@ -17,12 +17,15 @@
 
 body {
     background-color: antiquewhite;
-    font-family: Cursive;
+
     font-size: 17px;
     padding: 8px;
 
 }
 
+#accordiontext {
+    text-align: center;
+}
 
 .Parent {
     background-color: rgb(221, 219, 216);
@@ -117,7 +120,7 @@ body {
 
 .button {
     font-size: large;
-    font-family: cursive;
+
 }
 
 .container {
