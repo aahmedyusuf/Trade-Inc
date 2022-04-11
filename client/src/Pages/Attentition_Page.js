@@ -4,10 +4,13 @@ import ReactDOM from 'react-dom';
 import loginImage from './SVG/login2.svg';
 import { useState } from 'react';
 
+const port = process.env.PORT || 4000;
 
 function Attentition_Page() {
     document.title = "Welcome"
-
+    fetch(`http://localhost:${port}/api/status`)
+    .then(response => response.json())
+    .then(data => console.log(data));
 
     const [pageState, setpageState] = useState('Check');
     function handleSubmit(value) {

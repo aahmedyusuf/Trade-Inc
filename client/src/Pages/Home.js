@@ -5,7 +5,7 @@ import loginImage from './SVG/login2.svg';
 import {  Link } from "react-router-dom";
 
 function Home(){
-    document.title = "Home"
+    document.title = "Home";
     return(
     <div>
         <Navbar></Navbar>
