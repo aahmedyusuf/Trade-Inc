@@ -24,7 +24,7 @@ function Cart({ item, manufacturer }) {
                 <p>Manufacture 2 <span className="price">$</span></p>
                 <p>Manufacture 3 <span className="price">$</span></p>
                 <p>Manufacture 4 <span className="price">$</span></p>
-                <p><a href="#">{item} by {manufacturer}</a> <span className="price">$</span></p>
+                <p><a href="#">{item} {manufacturer}</a> <span className="price">$</span></p>
                 <hr />
                 <p>Total <span className="price"><b>$</b></span></p>
             </div>
