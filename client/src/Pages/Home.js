@@ -45,7 +45,8 @@ function Card(){
     return(
         <div className="Card">
         <img src="https://images.heb.com/is/image/HEBGrocery/000145352"/>
-        <div className = "container"> 
+        <div className = "container_home"> 
+        <br/>
         <h1> Title </h1>
         <h3> Note: Also, always specify the width and height of an image. If width and height are not specified, the page might flicker while the image loads.</h3>
         </div >

@@ -15,6 +15,7 @@ function Showall() {
     );
 }
 
+
 function Cart({ item, manufacturer }) {
     return (
         <div class="col-25">
@@ -174,8 +175,4 @@ function Carddetailes() {
 
 }
 
-
 export default Showall;
-
-
-
