@@ -4,11 +4,12 @@ import ReactDOM from 'react-dom';
 import loginImage from './SVG/login2.svg';
 import { useState } from 'react';
 
-const port = process.env.PORT || 4000;
+const endPoint = process.env.endPoint ||'http://localhost:4000/api';
 
 function Attentition_Page() {
     document.title = "Welcome"
-    fetch(`http://localhost:${port}/api/status`)
+    console.log(endPoint);
+    fetch(`${endPoint}/status`)
     .then(response => response.json())
     .then(data => console.log(data));
 
