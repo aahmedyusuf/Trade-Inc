@@ -19,7 +19,7 @@ function Navbar(){
     return (
         <ul>
          <li><Link style={{background:'rgb(55, 101, 189)'}} to="/home">Home</Link></li>
-          <li><Link to="/">CheckOut</Link></li>
+          <li><Link to="/checkout">CheckOut</Link></li>
           <li><Link to="/">Logout</Link></li>
 
         </ul>

@@ -165,10 +165,10 @@ function Carddetailes() {
                                     </div>
                                 </div>
                             </div>
-                            <button onClick={submitForm} form="form_name" className='button'>Submit</button>
                         </form>
                     </div>
                 </div>
+                <button onClick={submitForm} form="form_name" className='button'>Submit</button>
             </div>
         </div>
     )
