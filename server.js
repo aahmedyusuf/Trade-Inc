@@ -7,6 +7,11 @@ const path = require("path");
 
 var database = require('./Database');
 
+const user = {
+  username: '',
+  password:'',
+  type:''
+}
 
 const port = process.env.PORT || 4000;
 
@@ -24,6 +29,7 @@ app.use("/api/home", home);
 
 // App
 app.get("/api/status", (req, res) => {
+  console.log("!!!");
   res.json({ status: "Running" });
 });
 
@@ -33,17 +39,17 @@ app.get("/api/CreateCustomer", async (req, res) => {
 });
 
 app.get("/api/CreateManufacturer", async (req, res) => {
-  const data = await database.CreateManufacturer();
+  const data = await database.CreateManufacturer(req.query.username, req.query.password,req.query.name, req.query.description, req.query.address);
   res.json(data);
 });
 
 app.get("/api/CreateProduct", async (req, res) => {
-  const data = await database.CreateProduct();
+  const data = await database.CreateProduct(req.query.username, req.query.productname, req.query.description, req.query.url);
   res.json(data);
 });
 
 app.get("/api/CreateOrder", async (req, res) => {
-  const data = await database.CreateOrder();
+  const data = await database.CreateOrder(req.query.username, req.query.manu_username,req.query.productname, req.query.amount);
   res.json(data);
 });
 
@@ -53,8 +59,27 @@ app.get("/api/getProducts", async (req, res) => {
 });
 
 app.get("/api/getOrder", async (req, res) => {
-  const data = await database.getOrder();
+  const data = await database.getOrder(req.query.username);
   res.json(data);
+});
+
+app.get("/api/verifyLogin", async (req, res) => {
+  const data = await database.verifyLogin(req.query.username, req.query.password);
+  user.username = req.query.username;
+  user.password = req.query.password;
+  user.type = req.query.type;
+  res.json(data);
+});
+
+app.get("/api/seasion", (req, res) => {
+  res.json(user);
+});
+
+app.get("/api/logout", async (req, res) => {
+  user.username = "";
+  user.password = "";
+  user.type = "";
+  res.json({status:"loged out"});
 });
 
 app.get("*", (req, res) => {

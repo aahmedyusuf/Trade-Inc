@@ -26,11 +26,13 @@ async function CreateCustomer(username, password, name, description, address){
     try{
         const response1 = await pool.query(`INSERT INTO customer(username, password) VALUES($1, $2)`, [username,password]);
         const response2 = await pool.query(`INSERT INTO customer_info(username, name, description, address) VALUES($1, $2, $3, $4)`, [username,name, description, address]);
-        return response1.rows + response2.rows;
+        return 'sucess';
     }catch{
-
+        return 'failed';
     }
 }
+
+
 async function CreateManufacturer(username, password, name, description, address){
     try{
         const response1 = await pool.query(`INSERT INTO manufacturer(username, password) VALUES($1, $2)`, [username,password]);
@@ -81,5 +83,38 @@ async function getOrder(username){
 }
 //console.log(Torder());
 
-module.exports = {Connect, CreateCustomer, CreateManufacturer, CreateProduct, CreateOrder, getProducts, getOrder};
+async function verifyLogin(username, password){
+    try{
+        var query = `Select * from customer Where username = '${username}' AND password = '${password}'`;
+
+        const response = await pool.query(query);
+        if(!response.rows.length){
+            return {status:"Failed"};
+        }else{
+            return {status:"Sucessfull"};
+        }
+    }catch{
+        return {status:"Failed"};
+    }
+}
+
+function test(username, password){
+    try{
+        var query = `Select * from customer Where username = '${username}' AND password = '${password}'`;
+        pool.query(query, function(err, result){
+            if(err){
+                console.log(err);
+            }else{
+                console.log(result.rows);
+            }
+        });
+        return "sucessfull";
+    }catch{
+        return 'Failed';
+    }
+}
+
+
+
+module.exports = {Connect, CreateCustomer, CreateManufacturer, CreateProduct, CreateOrder, getProducts, getOrder,verifyLogin};
 

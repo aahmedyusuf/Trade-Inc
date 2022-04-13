@@ -1,27 +1,54 @@
 import './Home.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import loginImage from './SVG/login2.svg';
 import {  Link } from "react-router-dom";
+import {endPoint} from './endpoint';
+import { useState ,useEffect} from 'react';
 
 function Home(){
     document.title = "Home";
-    return(
-    <div>
-        <Navbar></Navbar>
-        <Card_Holder></Card_Holder>
-    </div>
-    )
+    const [status, setstatus] = useState('loged_out');
+    useEffect(() => {
+    fetch(`${endPoint}/seasion/`)
+    .then(response => response.json())
+    .then(data => {
+      if(data.username != ""){
+        setstatus("loged_in")
+      }
+    });
+    });
+
+    if(status == "loged_out"){
+       return(
+           <div>
+                   <h1> You do not have acess to this page</h1>
+
+           </div>
+       )
+    }else{
+        return(
+        <div>
+            <Navbar></Navbar>
+            <Card_Holder></Card_Holder>
+        </div>
+        )
+    }
 
 }
 
 function Navbar(){
+    function handleSubmit(){
+        fetch(`${endPoint}/logout`);
+    }
     return (
         <ul>
-         <li><Link style={{background:'rgb(55, 101, 189)'}} to="/home">Home</Link></li>
+          <li><Link to="/home">Logout</Link></li>
           <li><Link to="/checkout">CheckOut</Link></li>
-          <li><Link to="/">Logout</Link></li>
-
+          <li>
+            <Link to="/">
+             <span onClick={handleSubmit}>Home</span>
+            </Link>
+        </li>
         </ul>
     );
 }
