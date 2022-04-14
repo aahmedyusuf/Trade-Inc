@@ -97,20 +97,7 @@ async function verifyLogin(username, password) {
         return { status: "Failed" };
     }
 }
-async function verifymanLogin(username, password) {
-    try {
-        var query = `Select * from manufacturer Where username = '${username}' AND password = '${password}'`;
 
-        const response = await pool.query(query);
-        if (!response.rows.length) {
-            return { status: "Failed" };
-        } else {
-            return { status: "Sucessfull" };
-        }
-    } catch {
-        return { status: "Failed" };
-    }
-}
 function test(username, password) {
     try {
         var query = `Select * from customer Where username = '${username}' AND password = '${password}'`;

@@ -115,7 +115,7 @@ function LoginAsManufacturer({ onClick }) {
   };
   const [manufacturelogin, setManfacturelogin] = useState(manlogin);
   function handlemanfacturerLogin() {
-    fetch(`${endPoint}/verifymanLogin/?username=${manufacturelogin.username}&password=${manufacturelogin.password}&type=customer`)
+    fetch(`${endPoint}/verifyLogin/?username=${manlogin.username}&password=${manlogin.password}&type=manfu`)
       .then(response => response.json())
       .then(data => {
         if (data.status == "Failed") {
