@@ -209,7 +209,7 @@ function SignUpManufacturer({ onClick }) {
   };
   const [manufacturesignUp, setManufacturesignUp] = useState(manufacturer_info);
   function manSignup() {
-    fetch(`${endPoint}/CreateManufacturer/?username=${manufacturesignUp.username}&password=${manufacturesignUp.password}&name=${manufacturesignUp.name}&description=${manufacturesignUp.description}&address=${signUp.address}`)
+    fetch(`${endPoint}/CreateManufacturer/?username=${manufacturesignUp.username}&password=${manufacturesignUp.password}&name=${manufacturesignUp.name}&description=${manufacturesignUp.description}&address=${manufacturesignUp.address}`)
       .then(response => console.log(response.status))
   }
   return (

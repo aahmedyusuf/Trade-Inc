@@ -36,7 +36,7 @@ function CreateProduct() {
                 <br />
                 <input className="Field" type="text" id="fproduct_description" name="fproduct_description" placeholder="Product Description" onChange={(event) => setProduct({ ...product, description: event.target.value })} />
                 <br />
-                <button onclick={createproduct}> Create </button>
+                <button onClick={createproduct}> Create </button>
             </center>
         </div>
     )

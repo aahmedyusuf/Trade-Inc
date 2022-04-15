@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import loginImage from './SVG/login2.svg';
 import { Link } from "react-router-dom";
+import { endPoint } from './endpoint';
 
 function Manufacturer() {
     document.title = "Manufacturer"
