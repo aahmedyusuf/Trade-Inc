@@ -16,7 +16,7 @@ function Home(){
         setstatus("loged_in")
       }
     });
-    });
+    },[]);
 
     if(status == "loged_out"){
        return(
@@ -42,8 +42,12 @@ function Navbar(){
     }
     return (
         <ul>
-          <li><Link to="/home">Logout</Link></li>
-          <li><Link to="/checkout">CheckOut</Link></li>
+          <li>
+            <Link to="/">
+             <span onClick={handleSubmit}>Logout</span>
+            </Link>
+         </li>
+            <li><Link to="/checkout">CheckOut</Link></li>
           <li>
             <Link to="/">
              <span onClick={handleSubmit}>Home</span>
@@ -53,31 +57,55 @@ function Navbar(){
     );
 }
 
-function Card_Holder(){
-    return(
-        <div className = "centerd">
-        <div className = "Card_Holder">
-            <Card></Card>
-            <Card></Card>
-            <Card></Card>
-            <Card></Card>
-            <Card></Card>
+function Card_Holder() {
+    const products = []
+    const [status, setstatus] = useState(products);
 
-        </div>
-        </div>
-    )
+    useEffect(() => {
+        fetch(`${endPoint}/getProducts/`)
+        .then(response => response.json())
+        .then(data => {
+            setstatus(data);
+        })
+    }, [])
+
+    if(status.length > 0){
+        return(
+            <div className="centerd">
+                <div className="Card_Holder">
+                {Object.entries(status).map(([key, value]) => (
+                    <Card key={key} {...value}></Card>
+                ))}
+                </div>
+             </div>
+        )
+    }else{
+        return (
+            <div className="centerd">
+                <div className="Card_Holder">
+
+
+                </div>
+            </div>
+        )
+    }
 }
 
-function Card(){
-    return(
+function Card(props) {
+
+    function addToCart(){
+        
+    }
+
+    return (
         <div className="Card">
-        <img src="https://images.heb.com/is/image/HEBGrocery/000145352"/>
-        <div className = "container_home"> 
-        <br/>
-        <h1> Title </h1>
-        <h3> Note: Also, always specify the width and height of an image. If width and height are not specified, the page might flicker while the image loads.</h3>
-        </div >
-        <button> Add to Card</button>
+            <img src={props.url} />
+            <div className="container_home">
+                <br />
+                <h1>{props.name}</h1>
+                <h3>{props.description}</h3>
+            </div >
+            <button >Add to Cart</button>
         </div>
     )
 }

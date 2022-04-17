@@ -1,18 +1,37 @@
 import './Home.css';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import loginImage from './SVG/login2.svg';
 import { Link } from "react-router-dom";
 import { endPoint } from './endpoint';
+import { useState ,useEffect} from 'react';
 
 function Manufacturer() {
     document.title = "Manufacturer"
-    return (
-        <div>
-            <Navbar></Navbar>
-            <Card_Holder></Card_Holder>
-        </div>
-    )
+
+    const [status, setstatus] = useState('loged_out');
+    useEffect(() => {
+    fetch(`${endPoint}/seasion/`)
+    .then(response => response.json())
+    .then(data => {
+      if(data.username !== ""){
+        setstatus("loged_in")
+      }
+    });
+    },[]);
+    if(status === "loged_out"){
+        return(
+            <div>
+                    <h1> You do not have acess to this page</h1>
+ 
+            </div>
+        )
+     }else{
+        return (
+            <div>
+                <Navbar></Navbar>
+                <Card_Holder></Card_Holder>
+            </div>
+        )
+     }
 
 }
 
@@ -26,7 +45,7 @@ function Navbar() {
             <li><Link to="/CreateProduct">Create Products</Link></li>
             <li>
                 <Link to="/">
-                    <span onClick={handlelogoutSubmit}>Home</span>
+                    <span onClick={handlelogoutSubmit}>Logout</span>
                 </Link>
             </li>
 
@@ -36,30 +55,54 @@ function Navbar() {
 }
 
 function Card_Holder() {
-    return (
-        <div className="centerd">
-            <div className="Card_Holder">
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
-                <Card></Card>
+    const products = []
+    const [status, setstatus] = useState(products);
 
+    useEffect(() => {
+        fetch(`${endPoint}/seasion/`)
+        .then(response => response.json())
+        .then(data => {
+
+            fetch(`${endPoint}/getProduct_Manufacturer/?username=${data.username}`)
+            .then(response => response.json())
+            .then(data => {
+                setstatus(data);
+            })
+        });
+    }, [])
+
+    if(status.length > 0){
+        return(
+            <div className="centerd">
+                <div className="Card_Holder">
+                {Object.entries(status).map(([key, value]) => (
+                    <Card key={key} {...value}></Card>
+                ))}
+                </div>
+             </div>
+        )
+    }else{
+        return (
+            <div className="centerd">
+                <div className="Card_Holder">
+
+
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
-function Card() {
+function Card(props) {
     return (
         <div className="Card">
-            <img src="https://images.heb.com/is/image/HEBGrocery/000145352" />
+            <img src={props.url} />
             <div className="container_home">
                 <br />
-                <h1> Title </h1>
-                <h3> Note: Also, always specify the width and height of an image. If width and height are not specified, the page might flicker while the image loads.</h3>
+                <h1>{props.name}</h1>
+                <h3>{props.description}</h3>
             </div >
-            <button> Add to Card</button>
+            <button>Delete</button>
         </div>
     )
 }

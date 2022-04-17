@@ -58,17 +58,31 @@ app.get("/api/getProducts", async (req, res) => {
   res.json(data);
 });
 
+//getProduct_Manufacturer
+app.get("/api/getProduct_Manufacturer", async (req, res) => {
+  const data = await database.getProduct_Manufacturer(req.query.username);
+  res.json(data);
+});
 app.get("/api/getOrder", async (req, res) => {
   const data = await database.getOrder(req.query.username);
   res.json(data);
 });
 
 app.get("/api/verifyLogin", async (req, res) => {
-  const data = await database.verifyLogin(req.query.username, req.query.password);
-  user.username = req.query.username;
-  user.password = req.query.password;
-  user.type = req.query.type;
-  res.json(data);
+  if(req.query.type == 'customer'){
+   const data = await database.verifyLogin_Customer(req.query.username, req.query.password);
+   user.username = req.query.username;
+   user.password = req.query.password;
+   user.type = req.query.type;
+   res.json(data);
+  }else{
+    const data = await database.verifyLogin_Manuf(req.query.username, req.query.password);
+    user.username = req.query.username;
+    user.password = req.query.password;
+    user.type = req.query.type;
+    res.json(data);
+  }
+
 });
 
 app.get("/api/seasion", (req, res) => {

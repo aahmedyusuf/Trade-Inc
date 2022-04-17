@@ -61,7 +61,7 @@ function Check({ onClick }) {
 
 }
 
-function LoginAsCustomer({ onClick }) {
+function LoginAsCustomer({onClick }) {
   const navigate = useNavigate();
 
   const info = {
@@ -75,7 +75,7 @@ function LoginAsCustomer({ onClick }) {
     fetch(`${endPoint}/verifyLogin/?username=${login.username}&password=${login.password}&type=customer`)
       .then(response => response.json())
       .then(data => {
-        if (data.status == "Failed") {
+        if (data.status === "Failed") {
           setlogin({ ...login, result: "invalid login" });
         } else {
           setlogin({ ...login, result: "login in..." });
@@ -114,15 +114,17 @@ function LoginAsManufacturer({ onClick }) {
     result: ''
   };
   const [manufacturelogin, setManfacturelogin] = useState(manlogin);
+
   function handlemanfacturerLogin() {
-    fetch(`${endPoint}/verifyLogin/?username=${manlogin.username}&password=${manlogin.password}&type=manfu`)
+    console.log(manufacturelogin.username + " " + manufacturelogin.password);
+    fetch(`${endPoint}/verifyLogin/?username=${manufacturelogin.username}&password=${manufacturelogin.password}&type=manfu`)
       .then(response => response.json())
       .then(data => {
-        if (data.status == "Failed") {
+        if (data.status === "Failed") {
           setManfacturelogin({ ...manufacturelogin, result: "invalid login" });
         } else {
           setManfacturelogin({ ...manufacturelogin, result: "login in..." });
-          navigate("/home");
+          navigate("/Manufacturer");
 
         }
       });
@@ -152,6 +154,7 @@ function LoginAsManufacturer({ onClick }) {
 }
 
 function SignUpSmallBusiness({ onClick }) {
+  const navigate = useNavigate();
 
   const info = {
     username: '',
@@ -165,7 +168,12 @@ function SignUpSmallBusiness({ onClick }) {
 
   function handleSignup() {
     fetch(`${endPoint}/CreateCustomer/?username=${signUp.username}&password=${signUp.password}&name=${signUp.name}&description=${signUp.description}&address=${signUp.address}`)
-      .then(response => console.log(response.status))
+      .then(response => {
+        navigate("/");
+        console.log(response.status);
+
+
+      })
   }
 
   return (
@@ -200,6 +208,8 @@ function SignUpSmallBusiness({ onClick }) {
 }
 
 function SignUpManufacturer({ onClick }) {
+  const navigate = useNavigate();
+
   const manufacturer_info = {
     username: '',
     password: '',
@@ -210,8 +220,12 @@ function SignUpManufacturer({ onClick }) {
   const [manufacturesignUp, setManufacturesignUp] = useState(manufacturer_info);
   function manSignup() {
     fetch(`${endPoint}/CreateManufacturer/?username=${manufacturesignUp.username}&password=${manufacturesignUp.password}&name=${manufacturesignUp.name}&description=${manufacturesignUp.description}&address=${manufacturesignUp.address}`)
-      .then(response => console.log(response.status))
+      .then(response => {
+        console.log(response.status);
+        navigate('/');
+      })
   }
+
   return (
     <div className="Parent">
       <div className="Account-Info">

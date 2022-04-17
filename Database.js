@@ -42,6 +42,7 @@ async function CreateManufacturer(username, password, name, description, address
         return ("404");
     }
 }
+
 async function CreateProduct(manufacturer_username, productName, description, url) {
     try {
         const response1 = await pool.query(`INSERT INTO product(username, name) VALUES($1, $2)`, [manufacturer_username, productName]);
@@ -53,6 +54,7 @@ async function CreateProduct(manufacturer_username, productName, description, ur
     }
 
 }
+
 async function CreateOrder(username, manufacturer_username, productName, amount) {
     try {
         const response = await pool.query(`INSERT INTO user_order(username, m_username, product, amount) VALUES($1, $2, $3, $4)`, [username, manufacturer_username, productName, amount]);
@@ -61,6 +63,7 @@ async function CreateOrder(username, manufacturer_username, productName, amount)
         return ("404");
     }
 }
+
 async function getProducts() {
     try {
         const response = await pool.query('Select * from product,product_info');
@@ -70,7 +73,17 @@ async function getProducts() {
     }
 
 }
-//fix this
+
+async function getProduct_Manufacturer(username) {
+    try {
+        const query = `Select * from product,product_info where product.username='${username}'`
+        const response = await pool.query(query);
+        return response.rows;
+    } catch {
+        return ("404");
+    }
+
+}
 async function getOrder(username) {
 
     try {
@@ -81,9 +94,8 @@ async function getOrder(username) {
         return ("404");
     }
 }
-//console.log(Torder());
 
-async function verifyLogin(username, password) {
+async function verifyLogin_Customer(username, password) {
     try {
         var query = `Select * from customer Where username = '${username}' AND password = '${password}'`;
 
@@ -98,23 +110,22 @@ async function verifyLogin(username, password) {
     }
 }
 
-function test(username, password) {
+async function verifyLogin_Manuf(username, password) {
     try {
-        var query = `Select * from customer Where username = '${username}' AND password = '${password}'`;
-        pool.query(query, function (err, result) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log(result.rows);
-            }
-        });
-        return "sucessfull";
+        var query = `Select * from manufacturer Where username = '${username}' AND password = '${password}'`;
+
+        const response = await pool.query(query);
+        if (!response.rows.length) {
+            return { status: "Failed" };
+        } else {
+            return { status: "Sucessfull" };
+        }
     } catch {
-        return 'Failed';
+        return { status: "Failed" };
     }
 }
 
 
 
-module.exports = { Connect, CreateCustomer, CreateManufacturer, CreateProduct, CreateOrder, getProducts, getOrder, verifyLogin, verifymanLogin };
+module.exports = { Connect, CreateCustomer, CreateManufacturer, CreateProduct, CreateOrder, getProducts, getOrder, verifyLogin_Customer,verifyLogin_Manuf,getProduct_Manufacturer};
 

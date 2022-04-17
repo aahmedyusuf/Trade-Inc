@@ -19,8 +19,13 @@ function CreateProduct() {
 
 
     function createproduct() {
-        fetch(`${endPoint}/CreateProduct/?username=${product.manufacturer_name}&name=${product.productname}&description=${product.description}&url=${product.imgurl}`)
-            .then(response => console.log(response.status))
+        fetch(`${endPoint}/seasion/`)
+        .then(response => response.json())
+        .then(data => {
+            fetch(`${endPoint}/CreateProduct/?username=${data.username}&productname=${product.productname}&description=${product.description}&url=${product.imgurl}`)
+            .then(response => console.log(response.status));
+        });
+
     }
 
     return (
@@ -28,8 +33,6 @@ function CreateProduct() {
             <Navbar></Navbar>
 
             <center>
-                <input className="Field" type="text" id="fmanufacturername" name="fmanufacturername" placeholder="Manufacturer Name" onChange={(event) => setProduct({ ...product, manufacturer_name: event.target.value })} />
-                <br />
                 <input className="Field" type="text" id="fproductname" name="fproductname" placeholder="Product Name" onChange={(event) => setProduct({ ...product, productname: event.target.value })} />
                 <br />
                 <input className="Field" type="text" id="fproducturl" name="fproducturl" placeholder="Product Img url " onChange={(event) => setProduct({ ...product, imgurl: event.target.value })} />
