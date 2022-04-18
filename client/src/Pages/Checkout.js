@@ -2,32 +2,105 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import './Checkout.css';
+import {endPoint} from './endpoint';
+import { useState ,useEffect} from 'react';
+import {  Link } from "react-router-dom";
 
 function Showall() {
     document.title = "Checkout"
     return (
         <div>
-            <h2 id="header">Welcome to the Checkout Page!</h2>
-            <Cart></Cart>
-            <Demo></Demo>
-            <Carddetailes></Carddetailes>
+            <Navbar></Navbar>
+            <br/>
+            <h2 id="header">Welcome to the Checkout Page!</h2>    
+            <ItemHolder></ItemHolder>
         </div>
     );
 }
-
+function Navbar(){
+    function handleSubmit(){
+        fetch(`${endPoint}/logout`);
+    }
+    return (
+        <ul>
+            <li> <Link to="/home"> <span >Home</span></Link> </li>
+            <li><Link to="/checkout">CheckOut</Link></li> 
+            <li> <Link to="/"> <span onClick={handleSubmit}>Logout</span> </Link></li> 
+        </ul>
+    );
+}
 
 function Cart({ item, manufacturer }) {
     return (
         <div class="col-25">
             <div class="container">
                 <h4>Cart <span className="price"> </span></h4>
-                <p>Manufacture 2 <span className="price">$</span></p>
+                <p>Manufacture 2 <span className="price" href = ""></span></p>
                 <p>Manufacture 3 <span className="price">$</span></p>
                 <p>Manufacture 4 <span className="price">$</span></p>
                 <p><a href="#">{item} {manufacturer}</a> <span className="price">$</span></p>
                 <hr />
-                <p>Total <span className="price"><b>$</b></span></p>
             </div>
+        </div>
+    )
+}
+
+function ItemHolder(){
+    const products = []
+    const [status, setstatus] = useState(products);
+
+    useEffect(() => {
+        fetch(`${endPoint}/seasion/`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.username);
+
+            fetch(`${endPoint}/getOrder/?username=${data.username}`)
+            .then(response => response.json())
+            .then(data => {
+                setstatus(data);
+            })
+        });
+    }, [])
+
+    function refresh(){
+        fetch(`${endPoint}/seasion/`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.username);
+
+            fetch(`${endPoint}/getOrder/?username=${data.username}`)
+            .then(response => response.json())
+            .then(data => {
+                setstatus(data);
+            })
+        });
+    }
+
+    if(status.length > 0){
+        return(
+            <div className = "ItemHolder">
+                {Object.entries(status).map(([key, value]) => (
+                    <Item key={key} props={value} refresh={refresh}></Item>
+                ))}
+
+            </div>
+        )
+    }else{
+        return(
+            <div> <h1> No item in checkout</h1></div>
+        )
+    }
+}
+function Item({props,refresh}){
+    function remove(){
+        fetch(`${endPoint}/removeOrder/?username=${props.username}&productName=${props.product}`);
+        refresh();
+    }
+    return(
+        <div className = "mini_Card">
+            <img src={props.url} className="item_Img"/>
+            <button className = "b_remove" onClick={remove}>X</button>
         </div>
     )
 }

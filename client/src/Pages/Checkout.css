@@ -2,7 +2,45 @@
     text-align: center;
 }
 
+.mini_Card{
+    width: 300px;
+    height: 200px;
+    display: flex;
+    background-color: aliceblue;
+    border-radius: 20px;
 
+    transition: 1s;
+}
+.b_remove{
+    border-radius: 20px;
+
+    width: 100px;
+    height: 100px;
+    position:relative;
+    right:-30px;
+    top:-30px;
+    background-color: red;
+    font-size: larger;
+}
+
+.b_remove:hover{
+
+    background-color: brown;
+    width: 100px;
+    height: 100px;
+    border-radius: 0px;
+
+}
+.container_home{
+    padding: 2px 16px;
+}
+.ItemHolder{
+    display: grid;
+    column-gap: 10px;
+    row-gap: 30px;
+    grid-template-columns: auto auto auto auto;
+    padding: 2%;
+}
 #cardrow {
     text-align: left;
 }

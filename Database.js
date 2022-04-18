@@ -55,10 +55,11 @@ async function CreateProduct(manufacturer_username, productName, description, ur
 
 }
 
-async function CreateOrder(username, manufacturer_username, productName, amount) {
+async function CreateOrder(username, manufacturer_username, productName) {
     try {
-        const response = await pool.query(`INSERT INTO user_order(username, m_username, product, amount) VALUES($1, $2, $3, $4)`, [username, manufacturer_username, productName, amount]);
-        return response;
+        const query = `INSERT INTO user_order(username, m_username, product) VALUES('${username}','${manufacturer_username}','${productName}')`
+        const response = await pool.query(query);
+        return "Sucessfull";
     } catch {
         return ("404");
     }
@@ -87,13 +88,25 @@ async function getProduct_Manufacturer(username) {
 async function getOrder(username) {
 
     try {
-        const response = await pool.query('Select * from user_order,product_info Where user_order.m_username = product_info.username AND user_order.product = product_info.name');
+        const query = `Select user_order.*, product_info.url from user_order,product_info Where user_order.username = '${username}'`;
+        const response = await pool.query(query);
         //console.log(response.rows);
         return response.rows;
     } catch (err) {
         return ("404");
     }
 }
+async function removeOrder(username,productName) {
+    try {
+        const query = `DELETE FROM user_order Where user_order.username = '${username}' AND user_order.product = '${productName}'`;
+        const response = await pool.query(query);
+        //console.log(response.rows);
+        return response.rows;
+    } catch (err) {
+        return ("404");
+    }
+}
+
 
 async function verifyLogin_Customer(username, password) {
     try {
@@ -127,5 +140,5 @@ async function verifyLogin_Manuf(username, password) {
 
 
 
-module.exports = { Connect, CreateCustomer, CreateManufacturer, CreateProduct, CreateOrder, getProducts, getOrder, verifyLogin_Customer,verifyLogin_Manuf,getProduct_Manufacturer};
+module.exports = { Connect, CreateCustomer, CreateManufacturer, CreateProduct, CreateOrder, getProducts, getOrder, verifyLogin_Customer,verifyLogin_Manuf,getProduct_Manufacturer,removeOrder};
 

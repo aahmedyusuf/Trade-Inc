@@ -42,17 +42,10 @@ function Navbar(){
     }
     return (
         <ul>
-          <li>
-            <Link to="/">
-             <span onClick={handleSubmit}>Logout</span>
-            </Link>
-         </li>
-            <li><Link to="/checkout">CheckOut</Link></li>
-          <li>
-            <Link to="/">
-             <span onClick={handleSubmit}>Home</span>
-            </Link>
-        </li>
+
+            <li> <Link to="/home"> <span >Home</span></Link> </li>
+            <li><Link to="/checkout">CheckOut</Link></li> 
+            <li> <Link to="/"> <span onClick={handleSubmit}>Logout</span> </Link></li> 
         </ul>
     );
 }
@@ -94,8 +87,15 @@ function Card_Holder() {
 function Card(props) {
 
     function addToCart(){
+        //CreateOrder(req.query.username, req.query.manu_username,req.query.productname);
+        fetch(`${endPoint}/seasion/`)
+        .then(response => response.json())
+        .then(data => {
+            fetch(`${endPoint}/CreateOrder/?username=${data.username}&manu_username=${props.username}&productname=${props.name}`)
+            .then(response => response.json())
+            .then(data => console.log(data));
+        })}
         
-    }
 
     return (
         <div className="Card">
@@ -105,7 +105,7 @@ function Card(props) {
                 <h1>{props.name}</h1>
                 <h3>{props.description}</h3>
             </div >
-            <button >Add to Cart</button>
+            <button onClick={addToCart}>Add to Cart</button>
         </div>
     )
 }

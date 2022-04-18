@@ -49,7 +49,7 @@ app.get("/api/CreateProduct", async (req, res) => {
 });
 
 app.get("/api/CreateOrder", async (req, res) => {
-  const data = await database.CreateOrder(req.query.username, req.query.manu_username,req.query.productname, req.query.amount);
+  const data = await database.CreateOrder(req.query.username, req.query.manu_username,req.query.productname);
   res.json(data);
 });
 
@@ -65,6 +65,11 @@ app.get("/api/getProduct_Manufacturer", async (req, res) => {
 });
 app.get("/api/getOrder", async (req, res) => {
   const data = await database.getOrder(req.query.username);
+  res.json(data);
+});
+
+app.get("/api/removeOrder", async (req, res) => {
+  const data = await database.removeOrder(req.query.username,req.query.productName);
   res.json(data);
 });
 
