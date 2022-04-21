@@ -1,51 +1,51 @@
 import './Home.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {  Link } from "react-router-dom";
-import {endPoint} from './endpoint';
-import { useState ,useEffect} from 'react';
+import { Link } from "react-router-dom";
+import { endPoint } from './endpoint';
+import { useState, useEffect } from 'react';
 
-function Home(){
+function Home() {
     document.title = "Home";
     const [status, setstatus] = useState('loged_out');
     useEffect(() => {
-    fetch(`${endPoint}/seasion/`)
-    .then(response => response.json())
-    .then(data => {
-      if(data.username != ""){
-        setstatus("loged_in")
-      }
-    });
-    },[]);
+        fetch(`${endPoint}/seasion/`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.username != "") {
+                    setstatus("loged_in")
+                }
+            });
+    }, []);
 
-    if(status == "loged_out"){
-       return(
-           <div>
-                   <h1> You do not have acess to this page</h1>
+    if (status == "loged_out") {
+        return (
+            <div>
+                <h1> You do not have acess to this page</h1>
 
-           </div>
-       )
-    }else{
-        return(
-        <div>
-            <Navbar></Navbar>
-            <Card_Holder></Card_Holder>
-        </div>
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                <Navbar></Navbar>
+                <Card_Holder></Card_Holder>
+            </div>
         )
     }
 
 }
 
-function Navbar(){
-    function handleSubmit(){
+function Navbar() {
+    function handleSubmit() {
         fetch(`${endPoint}/logout`);
     }
     return (
         <ul>
 
             <li> <Link to="/home"> <span >Home</span></Link> </li>
-            <li><Link to="/checkout">CheckOut</Link></li> 
-            <li> <Link to="/"> <span onClick={handleSubmit}>Logout</span> </Link></li> 
+            <li><Link to="/checkout">CheckOut</Link></li>
+            <li> <Link to="/"> <span onClick={handleSubmit}>Logout</span> </Link></li>
         </ul>
     );
 }
@@ -56,23 +56,23 @@ function Card_Holder() {
 
     useEffect(() => {
         fetch(`${endPoint}/getProducts/`)
-        .then(response => response.json())
-        .then(data => {
-            setstatus(data);
-        })
+            .then(response => response.json())
+            .then(data => {
+                setstatus(data);
+            })
     }, [])
 
-    if(status.length > 0){
-        return(
+    if (status.length > 0) {
+        return (
             <div className="centerd">
                 <div className="Card_Holder">
-                {Object.entries(status).map(([key, value]) => (
-                    <Card key={key} {...value}></Card>
-                ))}
+                    {Object.entries(status).map(([key, value]) => (
+                        <Card key={key} {...value}></Card>
+                    ))}
                 </div>
-             </div>
+            </div>
         )
-    }else{
+    } else {
         return (
             <div className="centerd">
                 <div className="Card_Holder">
@@ -86,16 +86,17 @@ function Card_Holder() {
 
 function Card(props) {
 
-    function addToCart(){
+    function addToCart() {
         //CreateOrder(req.query.username, req.query.manu_username,req.query.productname);
         fetch(`${endPoint}/seasion/`)
-        .then(response => response.json())
-        .then(data => {
-            fetch(`${endPoint}/CreateOrder/?username=${data.username}&manu_username=${props.username}&productname=${props.name}`)
             .then(response => response.json())
-            .then(data => console.log(data));
-        })}
-        
+            .then(data => {
+                fetch(`${endPoint}/CreateOrder/?username=${data.username}&manu_username=${props.username}&productname=${props.name}`)
+                    .then(response => response.json())
+                    .then(data => console.log(data));
+            })
+    }
+
 
     return (
         <div className="Card">

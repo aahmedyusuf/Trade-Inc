@@ -6,10 +6,12 @@ import { useState } from 'react';
 import { endPoint } from './endpoint';
 import { useNavigate } from 'react-router-dom';
 
+
 function Attentition_Page() {
   document.title = "Welcome"
 
   const [pageState, setpageState] = useState('Check');
+
 
   function handleSubmit(value) {
     setpageState(value);
@@ -61,7 +63,7 @@ function Check({ onClick }) {
 
 }
 
-function LoginAsCustomer({onClick }) {
+function LoginAsCustomer({ onClick }) {
   const navigate = useNavigate();
 
   const info = {
@@ -154,6 +156,7 @@ function LoginAsManufacturer({ onClick }) {
 }
 
 function SignUpSmallBusiness({ onClick }) {
+
   const navigate = useNavigate();
 
   const info = {
@@ -171,9 +174,12 @@ function SignUpSmallBusiness({ onClick }) {
       .then(response => {
         navigate("/");
         console.log(response.status);
+        if (response.status === 200) {
+          alert('You have signed up successfully')
 
-
-      })
+        }
+      }
+      )
   }
 
   return (
@@ -208,6 +214,7 @@ function SignUpSmallBusiness({ onClick }) {
 }
 
 function SignUpManufacturer({ onClick }) {
+
   const navigate = useNavigate();
 
   const manufacturer_info = {
@@ -223,6 +230,10 @@ function SignUpManufacturer({ onClick }) {
       .then(response => {
         console.log(response.status);
         navigate('/');
+        if (response.status === 200) {
+          alert('You have signed up successfully')
+
+        }
       })
   }
 
